@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}New Entry{% endblock %}
+{% block content %}
+
+<p><center>
+    <h3>Enter new username and password</h3>
+            <fieldset>
+    <legend>New Entry</legend>
+            <form action='{{ url_for("newEntry") }}' method='POST' enctype=multipart/form-data>
+
+            Username:<input type='text' name='username' size='20' maxlength="32" autofocus />
+
+            </p>
+        <p>
+
+            Password:<input type='password' name='password' size='20' maxlength="32" />
+        </p>
+        <p>Created by: <input type="text" name="creator" value="{{ request.cookies.get('username') }}" maxlength="32" size='20' disabled>
+        </p>
+        <p>Avatar:<input type=file name=file>
+
+         </p>
+        <p>
+
+            <button type='submit'>insert</button>
+            <button type='reset'>Erase</button>
+
+
+        </p>
+
+
+        </form>
+        </fieldset>
+        <a href='{{ url_for("closeConn") }}' >Close connection</a>
+        <a href='/' >Main page</a>
+        </center>
+
+{% endblock %}

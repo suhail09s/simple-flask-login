@@ -1,0 +1,111 @@
+<html>
+
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: gray;
+  color: white;
+  text-align: center;
+
+}
+div.serverStatus {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+div.loggedinUser {
+  position: fixed;
+  top: 25px;
+  right: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+div.flashes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+
+
+</style>
+
+<head>
+    {% block head %}
+<title>  {% block title %}{% endblock %} - base</title>
+  {% endblock %}
+</head>
+
+
+<body bgcolor="#ededed">
+
+  <center>
+
+  <div id='logo'> <img src="{{ profile }}" alt='{{ profile }}' height=150px >
+
+    </div>
+    <h2>User panel</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+        <ul class="flashes">
+        <div class='flashes'>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+
+        {% endfor %}
+        </ul>
+        </div>
+
+        {% endif %}
+        {% endwith %}
+
+    <div id='content'>
+        {% if request.cookies.get('username') == None %}
+
+        <h4>Not logged in</h4>
+        {% else %}
+        <div class='loggedinUser'>
+        <b>Logged in as: {{ request.cookies.get('username') }}</b>
+        </div>
+        {% endif %}
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+    <footer>
+        {% block footer %}
+        <p>
+        <div class="serverStatus">
+        Server Status: {{ serverStatus }}<br>
+        </div>
+        </p>
+        <div class="footer">
+            <p>
+        &copy; Copyrights 2018 by Suhail<br><a href='/'>Main Page</a>
+        {% if request.cookies.get('username') !=None and request.cookies.get('username') !="" %}
+        <a href='{{url_for("logout")}}'>Logout</a>
+        <form action='{{ url_for("decache") }}' method='POST'>
+        <input type="hidden" name="box" value="0">
+            <button type='submit'>De-cache</button>
+        </form>
+        </p>
+        {% endif %}
+        {% endblock %}
+    </center>
+    </div>
+    </footer>
+</body>
+
+
+
+
+</html>

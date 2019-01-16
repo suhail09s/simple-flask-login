@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<script type="text/javascript" >var x=1;</script>
+
+{{ super() }}
+{% endblock %}
+{% block title %}Page- Microblog{% endblock %}
+    {% block content %}
+        <center>
+
+        {% if user=='' %}
+            <h4>Sorry,please enter your username.</h4>
+            <a href='/'>Login page</a>
+
+        {% elif user=='suhail' %}
+            <h1>Hello, Master!</h1>
+        {% elif user=='WRONG' %}
+        <h4>Sorry, incorrect username and password</h4>
+        <P><a href='/'>Login page</a>
+        {% else %}
+            <h1>Hello, {{ user }}!</h1>
+        {% endif%}
+        {% if user !="" and user !='WRONG' %}
+            <form action="{{  url_for('newEntry') }}" method='GET'>
+
+            <input type="submit" value="New entry">
+            </form>
+            <form action="{{  url_for('listAll') }}" method='GET'>
+
+            <input type="submit" value="List all">
+            </form>
+            <form action="{{  url_for('upload') }}" method='GET'>
+            <input type="submit" value="Update profile avatar">
+            </form>
+            <form action="{{  url_for('update') }}" method='GET'>
+            <input type="submit" value="Update cred">
+            </form>
+        {% endif %}
+            </center>
+
+        {% endblock %}

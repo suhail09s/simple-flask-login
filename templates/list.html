@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}List All{% endblock %}
+{% block content %}
+
+<style>
+table, th, td {
+  border: .5px solid gray;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align:center;
+}
+th {
+    background-color: #961313;
+    color: white;
+
+}
+</style>
+<center>
+<table style="width:75%">
+    <caption><b><h4>List of all users</h4></b></caption>
+  <tr>
+    <th>Select</th>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Password</th>
+    <th>created by</th>
+    <th>profile photo</th>
+  </tr>
+  <form action='{{ url_for("selected")}}' method='POST'>
+  {% for r in res %}
+  <tr>
+    <td><input type="checkbox" name="box" value="{{ r[0] }}"></td>
+    <td>{{ r[0] }}</td>
+    <td>{{ r[1] }}</td>
+    <td>{{ r[2] }}</td>
+    <td>{{ r[3] }}</td>
+    <td><div id='logo'> <img src="{{ r[4] }}" alt='{{ r[4] }}' height=50px ></div></td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<br>
+    <button type='submit' name='submit' value='remove'>Remove</button>
+    <button type='submit' name='submit' value='update'>update</button>
+    <button type='reset'>Deselect</button>
+</form>
+
+</center>
+<br>
+<a style='padding-bottom: 120px;' >. </a>
+<br>
+{% endblock %}

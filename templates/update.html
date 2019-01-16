@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Update page{% endblock %}
+{% block content %}
+<style>
+div.profilepic {
+  position: fixed;
+  top: 25%;
+  left: 2%;
+  width: 150px;
+}
+</style>
+<p><center>
+
+            <fieldset>
+    <legend>Update</legend>
+            <form action='{{ url_for("update") }}' method='POST' enctype=multipart/form-data>
+            <p>User ID: <input type="text" name="user_id" value="{{ res[0] }}" maxlength="32" size='3' readonly>
+        </p>
+            Username:<input type='text' name='username' value='{{ res[1] }}' size='20' maxlength="32" autofocus />
+
+            </p>
+        <p>
+            <div class='profilepic'><img src="{{ (res[4]) }}" alt='z' height=150px ></div>
+            Password:<input type='password' name='password' value='{{ res[2] }}' size='20' maxlength="32" />
+        </p>
+        <p>Created by: <input type="text" name="creator" value="{{ res[3] }}" maxlength="32" size='20' disabled>
+        </p>
+        <p>Avatar:<input type=file name=file>
+
+         </p>
+        <p>
+
+            <button type='submit'>insert</button>
+            <button type='reset'>Erase</button>
+
+
+        </p>
+
+
+        </form>
+        </fieldset>
+        <a href='{{ url_for("closeConn") }}' >Close connection</a>
+        <a href='/' >Main page</a>
+        </center>
+
+{% endblock %}

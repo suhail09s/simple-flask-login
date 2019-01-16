@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} Login Page {% endblock %}
+{% block content %}
+{% for i in range (1,15) %}
+<br>
+{% endfor%}
+
+        <p><center>
+            {% if user=='WRONG' %}
+            <p>Please, enter a valid cred</p>
+            {% endif %}
+            <form action='{{ url_for("index") }}' method='POST'>
+            <b>Username:</b><input type='text' name='username' autofocus />
+
+            </p>
+        <p>
+
+            <b>Password:</b><input type='password' name='password' />
+
+
+        </p>
+        <p>
+
+            <button type='submit'>Login</button>
+            <button type='reset'>reset</button>
+
+
+        </p>
+
+
+        </form></center>
+
+
+{% endblock %}
